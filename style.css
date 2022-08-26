@@ -32,7 +32,9 @@ body {
     height: 100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    line-height: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .flip-card-front {
