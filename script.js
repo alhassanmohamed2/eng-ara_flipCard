@@ -2,8 +2,8 @@ let card = document.querySelector(".flip-card .flip-card-inner");
 let arrow_next = document.querySelector(".next")
 let arrow_back = document.querySelector(".back")
 let num_face = 1;
-data_traker = 0;
-data = {}
+let data_traker = 0;
+let data = {}
 
 card.addEventListener("click", () => {
     if (num_face == 1) {
@@ -35,7 +35,7 @@ fetch("ara_eng.json")
     .then((json) => {
         data = json;
         swap_data(data['eng']["0"], data['ar']["0"])
-    });
+    }).catch(error => console.error(error));
 
 
 
