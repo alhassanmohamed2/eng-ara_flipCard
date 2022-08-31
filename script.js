@@ -5,6 +5,26 @@ let num_face = 1;
 let data_traker = 0;
 let data = {}
 
+(async() => {
+    const xhr = new XMLHttpRequest();
+    await new Promise((resolve) => {
+
+        xhr.onloadend = function() {
+            if (this.status === 404) {
+                alert("Error Getting Data")
+            }
+        };
+        xhr.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                data = JSON.parse(this.responseText);
+                swap_data(data['eng']["0"], data['ar']["0"])
+            }
+        }
+        xhr.open("GET", "ara_eng.json", true);
+        xhr.send();
+    });
+})();
+
 card.addEventListener("click", () => {
     if (num_face == 1) {
         card.style.transform = "rotateY(180deg)";
@@ -29,15 +49,6 @@ arrow_back.addEventListener("click", () => {
     }
 
 })
-
-fetch("ara_eng.json")
-    .then(response => response.json())
-    .then((json) => {
-        data = json;
-        swap_data(data['eng']["0"], data['ar']["0"])
-    }).catch(error => console.error(error));
-
-
 
 function swap_data(eng, ara) {
     card.firstElementChild.innerHTML = eng;
